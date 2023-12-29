@@ -1,4 +1,4 @@
-RestAssured Practice
+# RestAssured Practice
 
 For this practice, we are going to test a real API using JAVA, RestAssured, any test runner and an appropriate framework architecture to organize and reuse the API calls (Do not forget POJOS!). 
 
