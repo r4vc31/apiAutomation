@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="FilmDetailsSuite">
+    <test name="FilmDetails">
+        <classes>
+            <class name="com.globant.tests.FilmDetailsTest" />
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="PersonDetailsSuite">
+    <parameter name="driver-path" value="C:\Users\r4vc3\taeAcademy\module2\WebAutomation\src\utils\chromedriver.exe" />
+
+    <test name="PersonDetailsTest">
+        <classes>
+            <class name="com.globant.tests.PersonDetailsTest" />
+        </classes>
+    </test>
+</suite>

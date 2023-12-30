@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="PlanetSuite">
+    <test name="PlanetTest">
+        <classes>
+            <class name="com.globant.tests.PlanetTest" />
+        </classes>
+    </test>
+</suite>
