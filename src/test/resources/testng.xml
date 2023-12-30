@@ -1,5 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite">
+    <parameter name="person-id" value="2" />
+    <parameter name="film-number" value="2" />
+    <parameter name="skin-color" value="gold" />
+    <parameter name="film-count" value="6" />
+    <parameter name="planet-number" value="1" />
+    <parameter name="film-id" value="7" />
     <test name="Test">
         <classes>
             <class name="com.globant.tests.PersonDetailsTest" />

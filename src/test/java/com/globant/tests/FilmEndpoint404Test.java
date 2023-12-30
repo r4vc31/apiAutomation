@@ -5,6 +5,7 @@ import com.globant.pages.PersonPage;
 import com.globant.utils.baseTest.BaseTest;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -17,8 +18,9 @@ public class FilmEndpoint404Test extends BaseTest {
         filmPage = new FilmPage();
     }
     @Test
-    public void test404ResponseForNonExistentFilm() {
-        filmPage.handle404NotFound("/films/7/");
+    @Parameters({"film-id"})
+    public void test404ResponseForNonExistentFilm(String filmId) {
+        assertStatusCode(filmPage.getFilmDetails(filmId), 404);
     }
 
 }

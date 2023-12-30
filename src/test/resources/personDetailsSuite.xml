@@ -1,6 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="PersonDetailsSuite">
-    <parameter name="driver-path" value="C:\Users\r4vc3\taeAcademy\module2\WebAutomation\src\utils\chromedriver.exe" />
+    <parameter name="person-id" value="2" />
+    <parameter name="skin-color" value="gold" />
+    <parameter name="film-count" value="6" />
 
     <test name="PersonDetailsTest">
         <classes>

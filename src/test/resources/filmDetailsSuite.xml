@@ -1,5 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="FilmDetailsSuite">
+    <parameter name="person-id" value="2" />
+    <parameter name="film-number" value="2" />
     <test name="FilmDetails">
         <classes>
             <class name="com.globant.tests.FilmDetailsTest" />

@@ -5,6 +5,7 @@ import com.globant.pages.PersonPage;
 import com.globant.utils.baseTest.BaseTest;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -18,19 +19,20 @@ public class PersonDetailsTest extends BaseTest {
     }
 
     @Test
-    public void testCharacterDetails() {
-        Response response = personPage.getPersonDetails("2");
+    @Parameters({"person-id", "skin-color", "film-count"})
+    public void testPersonDetails(String personId, String skinColor, int filmCount) {
+        Response personResponse = personPage.getPersonDetails(personId);
 
-        // Assert successful response
-        assertEquals(200, response.getStatusCode());
+        // Assert response
+        assertStatusCode(personResponse, 200);
 
         // Get Person object and access properties
-        Person people2 = response.as(Person.class);
+        Person people2 = extractResponseData(personResponse, Person.class);
 
         // Assert skin color
-        assertEquals("gold", people2.getSkinColor());
+        assertValue(skinColor, people2.getSkinColor(), "Expected skin color to be " + skinColor);
 
         // Assert film count
-        assertEquals(6, people2.getFilms().size());
+        assertValue(String.valueOf(filmCount), String.valueOf(people2.getFilms().size()), "Expected film count to be " + filmCount);
     }
 }

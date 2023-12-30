@@ -1,13 +1,16 @@
 package com.globant.tests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.globant.models.Film;
 import com.globant.models.Person;
 import com.globant.models.Planet;
+import com.globant.pages.FilmPage;
 import com.globant.pages.PersonPage;
 
 import com.globant.utils.baseTest.BaseTest;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -20,22 +23,24 @@ import static org.testng.AssertJUnit.assertTrue;
 
 public class PlanetDetailsTest extends BaseTest {
     private PersonPage personPage;
+    private FilmPage filmPage;
 
     @BeforeClass
     public void setup() {
         personPage = new PersonPage();
+        filmPage = new FilmPage();
     }
     @Test
-    public void testFirstPlanetDetailsFromLastFilm() {
-        Response response = personPage.getPersonDetails("2");
-        String lastFilmUrl = response.as(Person.class).getFilms().get(response.as(Person.class).getFilms().size() - 1);  // Get last film URL
+    @Parameters({"person-id", "planet-number"})
+    public void testFirstPlanetDetailsFromLastFilm(String personId, int planetNumber) {
+        Person person = extractResponseData(personPage.getPersonDetails(personId), Person.class);
+        List<String> films = person.getFilms();
 
-        Response filmResponse = personPage.getResponse(lastFilmUrl);
+        String lastFilmUrl = films.get(films.size() - 1);  // Get last film URL
+        Film film = extractResponseData(sendGetRequest(lastFilmUrl), Film.class);
 
-        String firstPlanetUrl = filmResponse.jsonPath().getString("planets[0]");
-
-        Response planetResponse = personPage.getResponse(firstPlanetUrl);
-        Planet planet = planetResponse.as(Planet.class);
+        String firstPlanetUrl = film.getPlanets().get(planetNumber-1);
+        Planet planet = extractResponseData(sendGetRequest(firstPlanetUrl), Planet.class);
 
         // Read fixture data
         ObjectMapper mapper = new ObjectMapper();
@@ -47,11 +52,10 @@ public class PlanetDetailsTest extends BaseTest {
         }
 
         // Assert gravity and terrains
-        assertEquals(planet.getGravity(), expectedPlanet.getGravity());
+        assertValue(expectedPlanet.getGravity(), planet.getGravity(), "Expected gravity to be " + expectedPlanet.getGravity());
+
         // Compare terrains after splitting
-        List<String> actualTerrains = Arrays.asList(planet.getTerrain().split(", "));
-        List<String> expectedTerrains = Arrays.asList(expectedPlanet.getTerrain().split(", "));
-        assertTrue(actualTerrains.containsAll(expectedTerrains));  // Ensure all expected terrains are present
+        assertValue(expectedPlanet.getTerrain(), planet.getTerrain(), "Expected terrain to be " + expectedPlanet.getTerrain());
     }
 
 }

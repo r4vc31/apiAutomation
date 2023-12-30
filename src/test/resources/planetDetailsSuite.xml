@@ -1,5 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="PlanetDetailsSuite">
+    <parameter name="person-id" value="2" />
+    <parameter name="planet-number" value="1" />
     <test name="PlanetDetailsTest">
         <classes>
             <class name="com.globant.tests.PlanetDetailsTest" />

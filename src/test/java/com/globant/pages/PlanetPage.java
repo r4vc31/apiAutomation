@@ -18,26 +18,4 @@ public class PlanetPage extends BasePage {
         return response.as(Planet.class);
     }
 
-    public String getPlanetGravity(String planetId) {
-        Planet planet = getPlanetDetails(planetId);
-        return planet.getGravity();
-    }
-
-    public String getPlanetTerrain(String planetId) {
-        Planet planet = getPlanetDetails(planetId);
-        return planet.getTerrain();
-    }
-
-    // Additional methods as needed:
-    // - getResidentsForPlanet
-    // - getFilmsForPlanet
-    // - getClimateForPlanet
-    // - ...
-
-    // Data validation methods:
-    public boolean validatePlanetName(String planetId, String expectedName) {
-        Planet planet = getPlanetDetails(planetId);
-        return planet.getName().equals(expectedName);
-    }
-
 }

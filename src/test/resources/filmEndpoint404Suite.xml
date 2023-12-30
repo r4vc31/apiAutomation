@@ -1,5 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="FilmEndpoint404sSuite">
+    <parameter name="film-id" value="7" />
     <test name="FilmEndpoint404Test">
         <classes>
             <class name="com.globant.tests.FilmEndpoint404Test" />
